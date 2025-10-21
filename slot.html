@@ -1,0 +1,74 @@
+<head>
+<link href='style.css' rel='stylesheet' type='text/css'>
+<title>Arcade</title>
+<meta charset="utf-8">
+</head>
+<body>
+<h1>Arcade</h1>
+<hr>
+<div class="center" style="max-width:900px;margin:auto;">
+  <h2 style="text-align:center;">Slot Machine</h2>
+  <div style="display:flex;justify-content:center;gap:16px;align-items:center;margin:12pt 0;">
+    <div id="reel1" class="quadcolumn" style="font-size:64pt;line-height:72pt;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.3);border-radius:16px;width:25%;text-align:center;">❔</div>
+    <div id="reel2" class="quadcolumn" style="font-size:64pt;line-height:72pt;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.3);border-radius:16px;width:25%;text-align:center;">❔</div>
+    <div id="reel3" class="quadcolumn" style="font-size:64pt;line-height:72pt;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.3);border-radius:16px;width:25%;text-align:center;">❔</div>
+  </div>
+  <div style="text-align:center;margin:8pt 0;color:#f8f8f8;">
+    Balance: <span id="balance">0</span>
+  </div>
+  <div style="display:flex;justify-content:center;gap:8px;align-items:center;margin:8pt 0;">
+    <input id="bet" type="number" value="50" min="1" step="1" style="padding:8pt 10pt;border-radius:12pt;border:1px solid rgba(255,255,255,0.35);background:rgba(255,255,255,0.06);color:#fff;width:120px;text-align:center;">
+    <button class="button" id="spin" style="width:200px;min-width:200px;">Spin</button>
+  </div>
+  <div style="display:flex;justify-content:center;gap:8px;align-items:center;margin:6pt 0;">
+    <button class="small_button" id="earn">Earn +100</button>
+    <button class="small_button" id="spend">Spend -100</button>
+    <button class="small_button_off" id="reset" style="cursor:pointer;">Reset</button>
+  </div>
+  <div style="text-align:center;margin:10pt 0;color:#f0f0f0;min-height:24pt;" id="msg"></div>
+</div>
+<script>
+(function(){
+  const symbols = ["🍒","🍋","⭐","🔔","🍀","🍇","7️⃣","💎","BAR"];
+  const weights = {"🍒":3,"🍋":3,"⭐":2,"🔔":2,"🍀":2,"🍇":2,"7️⃣":1,"💎":1,"BAR":1};
+  const pays = {"🍒":5,"🍋":3,"⭐":8,"🔔":10,"🍀":6,"🍇":4,"7️⃣":20,"💎":25,"BAR":15};
+  const reels = [document.getElementById('reel1'),document.getElementById('reel2'),document.getElementById('reel3')];
+  const balEl = document.getElementById('balance');
+  const betEl = document.getElementById('bet');
+  const msgEl = document.getElementById('msg');
+  const spinBtn = document.getElementById('spin');
+  const earnBtn = document.getElementById('earn');
+  const spendBtn = document.getElementById('spend');
+  const resetBtn = document.getElementById('reset');
+  function getBal(){ return +(localStorage.getItem('mv_balance')||'1000'); }
+  function setBal(v){ localStorage.setItem('mv_balance', String(Math.max(0,Math.floor(v)))); balEl.textContent = '$'+Number(getBal()).toLocaleString(); }
+  function weightedPick(){ const total = symbols.reduce((s,k)=>s+weights[k],0); let r = Math.random()*total; for(const k of symbols){ r -= weights[k]; if(r<=0) return k; } return symbols[0]; }
+  function spin(){
+    const bet = Math.max(1, Math.floor(+betEl.value||0));
+    const bal = getBal();
+    if (bet>bal){ msgEl.textContent='Insufficient funds'; return; }
+    setBal(bal-bet);
+    msgEl.textContent='';
+    spinBtn.disabled = true;
+    let t=0; const dur=[1000,1200,1400]; const ints=[];
+    reels.forEach((r,i)=>{ ints[i]=setInterval(()=>{ r.textContent = symbols[Math.floor(Math.random()*symbols.length)]; },60+i*10); });
+    setTimeout(()=>{ reels.forEach((r,i)=>{ clearInterval(ints[i]); r.textContent = weightedPick(); });
+      const [a,b,c] = reels.map(r=>r.textContent);
+      let win=0;
+      if(a===b && b===c){ win = bet * (pays[a]||0); }
+      else if(a===b || b===c || a===c){ win = Math.floor(bet * 1.5); }
+      if(win>0){ setBal(getBal()+win); msgEl.textContent = 'You won $'+win.toLocaleString(); }
+      else { msgEl.textContent = 'Better luck next time'; }
+      spinBtn.disabled = false;
+    }, Math.max(...dur));
+  }
+  function add(n){ setBal(getBal()+n); msgEl.textContent = (n>=0?'+$':'-$')+Math.abs(n).toLocaleString(); }
+  function reset(){ localStorage.removeItem('mv_balance'); setBal(getBal()); msgEl.textContent='Balance reset'; }
+  spinBtn.addEventListener('click', spin);
+  earnBtn.addEventListener('click', ()=>add(100));
+  spendBtn.addEventListener('click', ()=>{ if(getBal()>=100) add(-100); else msgEl.textContent='Insufficient funds'; });
+  resetBtn.addEventListener('click', reset);
+  setBal(getBal());
+})();
+</script>
+</body>

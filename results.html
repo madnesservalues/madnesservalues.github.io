@@ -1,0 +1,315 @@
+<head>
+<!-- Removed external Google Fonts; using system fonts via CSS: Segoe UI, Tahoma, Arial -->
+<link href='style.css' rel='stylesheet' type='text/css'>
+<title>MadnessValues Results</title>
+<link rel="icon" type="x-icon" href="icon.png">
+<link rel="shortcut icon" type="x-icon" href="icon.png">
+<meta charset="utf-8">
+<script>
+  version = "Test Edition #2" //Remember to update this before making changes to the test itself!
+</script>
+</head>
+<script type="application/javascript"
+        src="ideologies.js">
+</script>
+
+<body>
+<h1>MadnessValues</h1>
+<hr>
+
+<h1>Results</h1>
+
+<h2>Judgemental Axis: <span class="weight-300" id="judge-label"></span></h2>
+<div class="axis">
+    <img id="img-character" src="value_images/Character.png" height="128pt"/>
+    <div class="bar character" id="bar-character"><div class="text-wrapper" id="character"></div></div>
+    <div class="bar content" id="bar-content"><div class="text-wrapper" id="content"></div></div>
+    <img id="img-content" src="value_images/Content.png" height="128pt"/>
+</div>
+<h2>Diplomatic Axis: <span class="weight-300" id="diplomatic-label"></span></h2>
+<div class="axis">
+    <img id="img-small" src="value_images/Independent.png" height="128pt"/>
+    <div class="bar small" id="bar-small"><div class="text-wrapper" id="small"></div></div>
+    <div class="bar group" id="bar-group"><div class="text-wrapper" id="group"></div></div>
+    <img id="img-group" src="value_images/Conglomerate.png" height="128pt"/>
+</div>
+<h2>Rulebase Axis: <span class="weight-300" id="state-label"></span>  <img id="1984" height="64" width="256" src="https://media.tenor.com/B73YzoVqIfQAAAAd/sopranos-paulie-gualtieri.gif" hidden="true"></h2>
+<div class="axis">
+    <img id="img-liberty" src="value_images/Expressive.png" height="128pt"/>
+    <div class="bar liberty" id="bar-liberty"><div class="text-wrapper" id="liberty"></div></div>
+    <div class="bar authority" id="bar-authority"><div class="text-wrapper" id="authority"></div></div>
+    <img id="img-authority" src="value_images/Restrictive.png" height="128pt"/>
+</div>
+<h2>Production Axis: <span class="weight-300" id="society-label"></span></h2>
+<div class="axis">
+    <img id="img-tradition" src="value_images/Traditional.png" height="128pt"/>
+    <div class="bar tradition" id="bar-tradition"><div class="text-wrapper" id="tradition"></div></div>
+    <div class="bar progress" id="bar-progress"><div class="text-wrapper" id="progress"></div></div>
+    <img id="img-progress" src="value_images/Innovative.png" height="128pt"/>
+</div>
+<h2>Stylized Axis: <span class="weight-300" id="ambiguity-label"></span></h2>
+<div class="axis">
+    <img id="img-defined" src="value_images/Defined.png" height="128pt"/>
+    <div class="bar defined" id="bar-defined"><div class="text-wrapper" id="defined"></div></div>
+    <div class="bar ambiguity" id="bar-ambiguity"><div class="text-wrapper" id="ambiguity"></div></div>
+    <img id="img-ambiguity" src="value_images/Ambiguous.png" height="128pt"/>
+</div>
+<h2>Normalcy Axis: <span class="weight-300" id="weird-label"></span></h2>
+<div class="axis">
+    <img id="img-vanilla" src="value_images/Vanilla.png" height="128pt"/>
+    <div class="bar vanilla" id="bar-vanilla"><div class="text-wrapper" id="vanilla"></div></div>
+    <div class="bar esoteric" id="bar-esoteric"><div class="text-wrapper" id="esoteric"></div></div>
+    <img id="img-esoteric" src="value_images/Esoteric.png" height="128pt"/>
+</div>
+
+<h2>Closest Match: <span class="weight-300" id="ideology-label"></span></h2>
+<p>Ideological matching is a work in progress, there will be more ideologies in the future, and therefore is much less accurate than the values and axes.</p>
+<br>
+<p>congratulations  : ) </p>
+<p>Contact: ivanfartman67@gmail.com</p>
+<hr/>
+<img src="" id="banner">
+<button class="button" onclick="location.href='index.html';">Back</button> <br>
+<!-- Website visit statistics - no personal information is collected! -->
+<script type="text/javascript">
+var sc_project=11325211;
+var sc_invisible=1;
+var sc_security="fd9f0659";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11325211/0/fd9f0659/1/" alt="web
+stats"></a></div></noscript>
+<script>
+  // Add skeuomorphic overlay wrappers around value images so we can layer gloss over them
+  document.addEventListener('DOMContentLoaded', function () {
+    function wrapImg(img){
+      if (img.parentElement && img.parentElement.classList.contains('skeuo-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'skeuo-wrap';
+      img.parentNode.insertBefore(wrap, img);
+      wrap.appendChild(img);
+    }
+    document.querySelectorAll('.axis > img').forEach(wrapImg);
+  });
+  // Ensure existing onload logic (canvas banner) still runs
+</script>
+<script>
+    function getQueryVariable(variable)
+    {
+           var query = window.location.search.substring(1)
+           var vars = query.split("&")
+           for (var i=0;i<vars.length;i++) {
+                   var pair = vars[i].split("=")
+                   if(pair[0] == variable) {return pair[1]}
+           }
+           return(NaN);
+    }
+
+    function setBarValue(name, value) {
+        innerel = document.getElementById(name)
+        outerel = document.getElementById("bar-" + name)
+        outerel.style.width = (value + "%")
+        innerel.innerHTML = (value + "%")
+        if (innerel.offsetWidth + 10 > outerel.offsetWidth) {
+            innerel.style.visibility = "hidden"
+        }
+    }
+
+    charArray = ["The People","Character","Character-Oriented","Subjective","Content-Oriented","Content","Pure Content"]
+    diplArray = ["Sugmalamation","Cosmopolitan","Open","Balanced","Withdrawn","Prideful","Sigma"]
+    govtArray = ["Anarchist","Expressive","Biberty","Balanced","Status","Authority","1984"]
+    sctyArray = ["Pure Innovation","Very Innovative","Innovative","Neutral","Traditional","Very Traditional","Bro think he in 2007 💀💀"]
+    dftnArray = ["Tack", "Very Defined", "Defined", "Neutral", "Wide", "Unfocused", "we ballin"]
+    nrmlArray = ["gormal", "Normal", "Averagely Normal", "Neutral", "Uncommonly Esoteric", "Esoteric", "a little random and quirky.. xD"]
+    
+    function setLabel(val,ary) {
+        if (val > 100) { return "" } else
+        if (val > 90) { return ary[0] } else
+        if (val > 75) { return ary[1] } else
+        if (val > 60) { return ary[2] } else
+        if (val >= 40) { return ary[3] } else
+        if (val >= 25) { return ary[4] } else
+        if (val >= 10) { return ary[5] } else
+        if (val >= 0) { return ary[6] } else
+        	{return ""}
+    }
+
+    character = getQueryVariable("e")
+    group     = getQueryVariable("g")
+    liberty   = getQueryVariable("l")
+    progress  = getQueryVariable("s")
+    defined   = getQueryVariable("d")
+    vanilla   = getQueryVariable("n")
+    content   = (100 - character).toFixed(1)
+    small     = (100 - group    ).toFixed(1)
+    authority = (100 - liberty  ).toFixed(1)
+    tradition = (100 - progress ).toFixed(1)
+    ambiguity = (100 - defined  ).toFixed(1)
+    esoteric  = (100 - vanilla  ).toFixed(1)
+
+    setBarValue("character", character)
+    setBarValue("content", content)
+    setBarValue("group", group)
+    setBarValue("small", small)
+    setBarValue("liberty", liberty)
+    setBarValue("authority", authority)
+    setBarValue("progress", progress)
+    setBarValue("tradition", tradition)
+    setBarValue("defined", defined)
+    setBarValue("ambiguity", ambiguity)
+    setBarValue("vanilla", vanilla)
+    setBarValue("esoteric", esoteric)
+
+    document.getElementById("judge-label").innerHTML = setLabel(character, charArray)
+    if (character <= 1) {
+        document.getElementById("judge-label").innerHTML = "Racism"
+    }
+    document.getElementById("diplomatic-label").innerHTML = setLabel(group, diplArray)
+    document.getElementById("state-label").innerHTML = setLabel(liberty, govtArray)
+    if (liberty < 10) {
+        document.getElementById("1984").hidden = false;
+    }
+    document.getElementById("society-label").innerHTML = setLabel(progress, sctyArray)
+    document.getElementById("ambiguity-label").innerHTML = setLabel(defined, dftnArray)
+    document.getElementById("weird-label").innerHTML = setLabel(vanilla, nrmlArray)
+
+    ideology = ""
+    ideodist = Infinity
+    for (var i = 0; i < ideologies.length; i++) {
+        dist = 0
+        dist += Math.pow(Math.abs(ideologies[i].stats.char - character), 2)
+        dist += Math.pow(Math.abs(ideologies[i].stats.govt - liberty), 2)
+        dist += Math.pow(Math.abs(ideologies[i].stats.dipl - group), 1.73856063)
+        dist += Math.pow(Math.abs(ideologies[i].stats.scty - progress), 1.73856063)
+        dist += Math.pow(Math.abs(ideologies[i].stats.dftn - defined), 1.57423021)
+        dist += Math.pow(Math.abs(ideologies[i].stats.nrml - vanilla), 1.57423021)
+        if (dist < ideodist) {
+            ideology = ideologies[i].name
+            ideodist = dist
+        }
+    }
+    document.getElementById("ideology-label").innerHTML = ideology
+
+    function createImage(src, x, y, w, h) {
+        img = new Image ()
+        img.src = src
+        img.onLoad = function() {
+            ctx.drawImage(img, x, y, w, h)
+        }
+    }
+
+    window.onload = function() {
+        var c = document.createElement("canvas")
+        var ctx = c.getContext("2d")
+        c.width = 800;
+        c.height = 890;
+        ctx.fillStyle = "#580808"
+        ctx.fillRect(0,0,800,890);
+
+        img = document.getElementById("img-character")
+        ctx.drawImage(img, 20, 170, 100, 100);
+        img = document.getElementById("img-content")
+        ctx.drawImage(img, 680, 170, 100, 100)
+        img = document.getElementById("img-small")
+        ctx.drawImage(img, 20, 290, 100, 100)
+        img = document.getElementById("img-group")
+        ctx.drawImage(img, 680, 290, 100, 100)
+        img = document.getElementById("img-liberty")
+        ctx.drawImage(img, 20, 410, 100, 100)
+        img = document.getElementById("img-authority")
+        ctx.drawImage(img, 680, 410, 100, 100)
+        img = document.getElementById("img-tradition")
+        ctx.drawImage(img, 20, 530, 100, 100)
+        img = document.getElementById("img-progress")
+        ctx.drawImage(img, 680, 530, 100, 100)
+        img = document.getElementById("img-defined")
+        ctx.drawImage(img, 20, 650, 100, 100)
+        img = document.getElementById("img-ambiguity")
+        ctx.drawImage(img, 680, 650, 100, 100)
+        img = document.getElementById("img-vanilla")
+        ctx.drawImage(img, 20, 770, 100, 100)
+        img = document.getElementById("img-esoteric")
+        ctx.drawImage(img, 680, 770, 100, 100)
+
+        ctx.fillStyle="#5D0202"
+        ctx.fillRect(120, 180, 560, 80)
+        ctx.fillRect(120, 300, 560, 80)
+        ctx.fillRect(120, 420, 560, 80)
+        ctx.fillRect(120, 540, 560, 80)
+        ctx.fillRect(120, 660, 560, 80)
+        ctx.fillRect(120, 780, 560, 80)
+
+        ctx.fillStyle="#009F21"
+        ctx.fillRect(120, 184, 5.6*character-2, 72)
+        ctx.fillStyle="#FF3B14"
+        ctx.fillRect(682-5.6*content, 184, 5.6*content-2, 72)
+        ctx.fillStyle="#9F4B00"
+        ctx.fillRect(120, 304, 5.6*small-2, 72)
+        ctx.fillStyle="#B200FF"
+        ctx.fillRect(682-5.6*group, 304, 5.6*group-2, 72)
+        ctx.fillStyle="#00D2FF"
+        ctx.fillRect(120, 424, 5.6*liberty-2, 72)
+        ctx.fillStyle="#CD0000"
+        ctx.fillRect(682-5.6*authority, 424, 5.6*authority-2, 72)
+        ctx.fillStyle="#8D8D8D"
+        ctx.fillRect(120, 544, 5.6*tradition-2, 72)
+        ctx.fillStyle="#FFC500"
+        ctx.fillRect(682-5.6*progress, 544, 5.6*progress-2, 72)
+        ctx.fillStyle="#A61C00"
+        ctx.fillRect(120, 664, 5.6*defined-2, 72)
+        ctx.fillStyle="#65A061"
+        ctx.fillRect(682-5.6*ambiguity, 664, 5.6*ambiguity-2, 72)
+        ctx.fillStyle="#FCFFDD"
+        ctx.fillRect(120, 784, 5.6*vanilla-2, 72)
+        ctx.fillStyle="#3500AE"
+        ctx.fillRect(682-5.6*esoteric, 784, 5.6*esoteric-2, 72)
+        
+        ctx.fillStyle="#AF1002"
+        ctx.font="700 60px Impact"
+        ctx.textAlign="left"
+        ctx.fillText("MadnessValues", 20, 90)
+        ctx.font="50px Montserrat"
+        ctx.fillText(ideology, 20, 140)
+
+        ctx.fillStyle="#1F1F1F"
+        ctx.textAlign="left"
+        if (character > 27) {ctx.fillText(character + "%", 130, 237.5)}
+        if (small     > 27) {ctx.fillText(small + "%", 130, 357.5)}
+        if (liberty   > 27) {ctx.fillText(liberty + "%", 130, 477.5)}
+        if (tradition > 27) {ctx.fillText(tradition + "%", 130, 597.5)}
+        if (defined   > 27) {ctx.fillText(defined + "%", 130, 717.5)}
+        if (vanilla   > 27) {ctx.fillText(vanilla + "%", 130, 837.5)}
+
+        ctx.textAlign="right"
+        if (content   > 27) {ctx.fillText(content + "%", 670, 237.5)}
+        if (group     > 27) {ctx.fillText(group + "%", 670, 357.5)}
+        if (authority > 27) {ctx.fillText(authority + "%", 670, 477.5)}
+        if (progress  > 27) {ctx.fillText(progress + "%", 670, 597.5)}
+        if (ambiguity > 27) {ctx.fillText(ambiguity + "%", 670, 717.5)}
+        if (esoteric  > 27) {ctx.fillText(esoteric + "%", 670, 837.5)}
+
+        ctx.fillStyle="#AF1002"
+        ctx.font="300 22px Montserrat"
+        ctx.fillText("madnessvalues.github.io", 780, 60)
+		ctx.fillText(version, 780, 90)
+        ctx.textAlign="center"
+        ctx.font="300 30px Impact"
+        ctx.fillStyle="#F8F8F8"
+        ctx.fillText("Judgemental Axis: " + document.getElementById("judge-label").innerHTML, 400, 175)
+        ctx.fillText("Diplomatic Axis: " + document.getElementById("diplomatic-label").innerHTML, 400, 295)
+        ctx.fillText("Rulebase Axis: " + document.getElementById("state-label").innerHTML, 400, 415)
+        ctx.fillText("Production Axis: " + document.getElementById("society-label").innerHTML, 400, 535)
+        ctx.fillText("Stylized Axis: " + document.getElementById("ambiguity-label").innerHTML, 400, 655)
+        ctx.fillText("Normalcy Axis: " + document.getElementById("weird-label").innerHTML, 400, 775)
+
+        document.getElementById("banner").src = c.toDataURL();
+    }
+    </script>
+</body>
