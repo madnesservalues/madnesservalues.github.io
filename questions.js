@@ -662,6 +662,17 @@ questions = [
             "nrml": 0
         }
     },
+	{
+        "question": "We don't need outsiders telling us how to run our side of the community.",
+        "effect": {
+            "char": 0,
+            "dipl": -10,
+            "govt": 0,
+            "scty": 0,
+            "dftn": 0,
+            "nrml": 0
+        }
+    },
     {
         "question": "Content creators should always give credit to their main group(s).",
         "effect": {
@@ -712,17 +723,6 @@ questions = [
             "char": 0,
             "dipl": -10,
             "govt": 0,
-            "scty": 0,
-            "dftn": 0,
-            "nrml": 0
-        }
-    },
-    {
-        "question": "My community would benefit off of moderating other servers.",
-        "effect": {
-            "char": 0,
-            "dipl": 5,
-            "govt": -5,
             "scty": 0,
             "dftn": 0,
             "nrml": 0
