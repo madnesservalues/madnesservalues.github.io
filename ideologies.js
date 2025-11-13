@@ -136,7 +136,7 @@ ideologies = [
         "name": "MadNat",
         "stats": {
             "char": 70,
-            "dipl": 65,
+            "dipl": 35,
             "govt": 40,
             "scty": 45,
             "dftn": 30,
